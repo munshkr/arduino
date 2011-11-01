@@ -89,7 +89,7 @@ ARDUINO_SKEL = pathJoin(ARDUINO_CORE, 'main.cpp')
 ARDUINO_CONF = pathJoin(ARDUINO_HOME, 'hardware/arduino/boards.txt')
 
 # Some OSs need bundle with IDE tool-chain
-if platform == 'darwin' or platform == 'win32': 
+if platform == 'darwin' or platform == 'win32':
     AVR_BIN_PREFIX = pathJoin(ARDUINO_HOME, 'hardware/tools/avr/bin', 'avr-')
     AVRDUDE_CONF = pathJoin(ARDUINO_HOME, 'hardware/tools/avr/etc/avrdude.conf')
 
@@ -142,11 +142,11 @@ def fnProcessing(target, source, env):
     wp = open ('%s'%target[0], 'wb')
     wp.write(open(ARDUINO_SKEL).read())
 
-    types='''void 
-    int char word long 
+    types='''void
+    int char word long
     float double byte long
-    boolean 
-    uint8_t uint16_t uint32_t 
+    boolean
+    uint8_t uint16_t uint32_t
     int8_t int16_t int32_t
     '''
     types=' | '.join(types.split())
