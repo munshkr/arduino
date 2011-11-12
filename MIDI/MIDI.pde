@@ -6,8 +6,14 @@ int readings[NUM_READINGS] = {};
 int idx, total;
 
 
+void ctrlChange(byte control, byte value) {
+  Serial.write(0xB0);
+  Serial.write(control);
+  Serial.write(value);
+}
+
+
 void setup() {
-  pinMode(13, OUTPUT);
   Serial.begin(31250);
 }
 
@@ -21,17 +27,7 @@ void loop() {
   int midiValue = map(avg, 0, 1023, 0, 127);
 
   if (midiValue != lastMidiValue) {
-    digitalWrite(13, HIGH);
-    delay(50);
-    digitalWrite(13, LOW);
-    //ctrlChange(0, midiValue);
+    ctrlChange(0, midiValue);
     lastMidiValue = midiValue;
   }
-}
-
-void ctrlChange(unsigned int control, unsigned int value) {
-  if (control > 0x65 || value > 0x7F) return;
-  Serial.write(0xB0);
-  Serial.write(control);
-  Serial.write(value);
 }
